@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>Bank.Transfer.Api.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mediatr.extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bank.Transaction.Application\Bank.Transaction.Application.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Application\Bank.Transfer.Application.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Domain.Core\Bank.Transfer.Domain.Core.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Infrastructure\Bank.Transfer.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+</Project>

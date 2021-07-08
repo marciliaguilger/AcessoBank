@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bank.Account.Service\Bank.Account.Service.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Application\Bank.Transfer.Application.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Domain.Core\Bank.Transfer.Domain.Core.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
