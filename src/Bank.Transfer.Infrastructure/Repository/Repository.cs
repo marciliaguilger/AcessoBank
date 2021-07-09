@@ -26,8 +26,8 @@ namespace Bank.Transfer.Infrastructure.Repository
 
         public void Dispose()
         {
-            //Db.Dispose();
-            //GC.SuppressFinalize(this);
+            Db.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public IQueryable<TEntity> GetAll()

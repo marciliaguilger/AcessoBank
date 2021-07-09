@@ -1,26 +1,18 @@
-using AutoMapper;
-using Bank.Messaging.Receive.Options;
-using Bank.Messaging.Receive.Receiver;
-using Bank.Transaction.Api.BackgroundServices;
-using Bank.Transaction.Api.Configuration;
-using Bank.Transaction.Application.Services;
-using Bank.Transfer.Infrastructure.Context;
+using Bank.Transaction.Update.Api.Configuration;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using System.Reflection;
 
-namespace Bank.Transaction.Api
+namespace Bank.Transaction.Manager
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 
@@ -29,23 +21,9 @@ namespace Bank.Transaction.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BankContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
-
-
-            var serviceClientSettingsConfig = Configuration.GetSection("RabbitMQConfigurations");
-            var serviceClientSettings = serviceClientSettingsConfig.Get<RabbitMqConfiguration>();
-            services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
-
-            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(ITransactionAppService).Assembly);
-
-            services.AddAutoMapper(typeof(Startup));
-
-            services.AddControllers();
-
+            services.AddMediatR(typeof(Startup));
             services.ResolveDependencies(Configuration);
-            services.AddHostedService<TransferenceRequestReceiver>();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

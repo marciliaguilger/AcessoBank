@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CrossCuting\**" />
+    <EmbeddedResource Remove="CrossCuting\**" />
+    <None Remove="CrossCuting\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="automapper.extensions.microsoft.dependencyinjection" Version="6.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
@@ -21,10 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CrossCuting\" />
   </ItemGroup>
 
 </Project>

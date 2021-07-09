@@ -28,6 +28,9 @@ namespace Bank.Transaction.Api.Configuration
 
             services.AddRefitClient<IAccountService>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration.GetSection("ExternalAccountService:BaseUrl").Value));
+            
+            services.AddRefitClient<ITransferenceUpdateService>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration.GetSection("ExternalUpdateTransferenceService:BaseUrl").Value));
 
             //CQRS
             services.AddTransient<IMediatorHandler, MediatorHandler>();

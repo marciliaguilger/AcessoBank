@@ -23,19 +23,13 @@ namespace Bank.Transaction.Application.Services
         //private readonly IConfiguration _configuration;
         //private IBus _bus;
         //private readonly string _rabbitConnectionString;
-        private readonly IAccountService _accountService;
-        private readonly ITransferenceService _transferenceService;
         private readonly IMediator _mediator;
 
         public TransactionAppService(
             //IConfiguration configuration,
-                                    IAccountService accountService,
-                                    ITransferenceService transferenceService,
                                     IMediator mediator)
         {
             //_configuration = configuration;
-            _accountService = accountService;
-            _transferenceService = transferenceService;
             _mediator = mediator;
             //_rabbitConnectionString = _configuration
             //    .GetSection("RabbitMQConfigurations")
@@ -58,17 +52,17 @@ namespace Bank.Transaction.Application.Services
         {
             try
             {
-                await Task.Run(() => _mediator.Send(new ProcessTransferenceCommand(
-                                                        transference.Id,
-                                                        transference.AccountDestination,
-                                                        transference.AccountOrigin,
-                                                        transference.Amount)));
-
-                //var result = _mediator.Send(new ProcessTransferenceCommand(
+                //await Task.Run(() => _mediator.Send(new ProcessTransferenceCommand(
                 //                                        transference.Id,
                 //                                        transference.AccountDestination,
                 //                                        transference.AccountOrigin,
-                //                                        transference.Amount));
+                //                                        transference.Amount)));
+
+                var result = await _mediator.Send(new ProcessTransferenceCommand(
+                                                        transference.Id,
+                                                        transference.AccountDestination,
+                                                        transference.AccountOrigin,
+                                                        transference.Amount));
             }
             catch (Exception ex)
             {

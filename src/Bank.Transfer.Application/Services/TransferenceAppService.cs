@@ -23,9 +23,9 @@ namespace Bank.Transfer.Application.Services
         public void Add(TransferenceDto transferenceDto)
         {
             var transference = _mapper.Map<Transference>(transferenceDto);
-            
+
             _transferenceService.Add(transference);
-           
+
         }
 
         public IEnumerable<TransferenceDto> GetAll()

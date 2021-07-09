@@ -45,6 +45,16 @@ namespace Bank.Transfer.Api.Controllers
 
             return Ok(command.Id);
         }
+        
+        //[HttpPost]
+        //[Route("transfer-update")]
+        //public async Task<bool> Update(TransferenceUpdateDto transferenceDto)
+        //{
+        //    var transference = _transferenceAppService.GetById(transferenceDto.Id);
+        //    transference.UpdateStatus(transferenceDto.Status);
+        //    transference.UpdateStatusDetail(transferenceDto.StatusDetail);
+        //    return await _transferenceAppService.UpdateAsync(transference);
+        //}
 
         [HttpGet]
         public IActionResult Get(Guid id)

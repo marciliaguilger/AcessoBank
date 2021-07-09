@@ -33,7 +33,7 @@ namespace Bank.Transfer.Domain.Entities
 
         public decimal Amount { get; private set; }
 
-        public DateTime RequestDate { get; private set; }
+        public DateTime? RequestDate { get; private set; }
 
         public TransferenceStatus TransferStatus { get; private set; }
 

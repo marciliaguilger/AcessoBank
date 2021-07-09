@@ -18,10 +18,14 @@ namespace Bank.Transaction.Application.Commands
     {
         private readonly ITransferenceService _transferenceService;
         private readonly IAccountService _accountService;
-        public TransferenceCommandHandler(ITransferenceService transferenceService, IAccountService accountService)
+        private readonly ITransferenceUpdateService _transferenceUpdateService;
+        public TransferenceCommandHandler(ITransferenceService transferenceService, 
+                                            IAccountService accountService,
+                                            ITransferenceUpdateService transferenceUpdateService)
         {
             _transferenceService = transferenceService;
             _accountService = accountService;
+            _transferenceUpdateService = transferenceUpdateService;
         }
         public async Task<bool> Handle(UpdateTransferenceStatusCommand message, CancellationToken cancellationToken)
         {
@@ -44,25 +48,30 @@ namespace Bank.Transaction.Application.Commands
             //var originUserAccount= await _accountService.GetAccountAndBalance(message.AccountOrigin);
             try
             {
-                var transferenceUpdate = new Transference(message.Id);
 
                 var apiResponseOriginUserAccount = await _accountService.GetAccountAndBalance(message.AccountOrigin);
 
 
                 if (!apiResponseOriginUserAccount.IsSuccessStatusCode)
                 {
-                    transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
-                    transferenceUpdate.UpdateStatusDetail("Error when trying to get account data");
-                    await _transferenceService.UpdateAsync(transferenceUpdate);
+                    var transferenceUpdate = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Error, "Error when trying to get account data");
+                    var apiResponse = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate);
+                    
+                    //transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
+                    //transferenceUpdate.UpdateStatusDetail("Error when trying to get account data");
+                    //await _transferenceService.UpdateAsync(transferenceUpdate);
                     //await _transferenceService.Commit();
                     return false;
                 }
                 var originUserAccount = apiResponseOriginUserAccount.Content;
                 if (originUserAccount.balance < message.Amount)
                 {
-                    transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
-                    transferenceUpdate.UpdateStatusDetail("Insufficient funds");
-                    await _transferenceService.UpdateAsync(transferenceUpdate);
+                    var transferenceUpdate1 = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Error, "Insufficient funds");
+                    var apiResponse1 = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate1);
+
+                    //transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
+                    //transferenceUpdate.UpdateStatusDetail("Insufficient funds");
+                    //await _transferenceService.UpdateAsync(transferenceUpdate);
                     //await _transferenceService.Commit();
                     return false;
                 }
@@ -77,17 +86,22 @@ namespace Bank.Transaction.Application.Commands
 
                 if (resultsTransactions.Any(t => t.Equals(false)))
                 {
+                    var transferenceUpdate2 = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Error, "Error when trying to transfer values");
+                    var apiResponse2 = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate2);
 
-                    transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
-                    transferenceUpdate.UpdateStatusDetail("Error when trying to transfer values");
-                    await _transferenceService.UpdateAsync(transferenceUpdate);
+                    //transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
+                    //transferenceUpdate.UpdateStatusDetail("Error when trying to transfer values");
+                    //await _transferenceService.UpdateAsync(transferenceUpdate);
                     //await _transferenceService.Commit();
                     return false;
                 }
 
-                transferenceUpdate = new Transference(message.Id);
-                transferenceUpdate.UpdateStatus(TransferenceStatus.Confirmed);
-                await _transferenceService.UpdateAsync(transferenceUpdate);
+                var transferenceUpdate3 = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Confirmed);
+                var apiResponse3 = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate3);
+
+                //transferenceUpdate = new Transference(message.Id);
+                //transferenceUpdate.UpdateStatus(TransferenceStatus.Confirmed);
+                //await _transferenceService.UpdateAsync(transferenceUpdate);
                 //await _transferenceService.Commit();
                 return true;
             }

@@ -4,24 +4,24 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:49843",
-      "sslPort": 44390
+      "applicationUrl": "http://localhost:15576",
+      "sslPort": 44322
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/Account",
+      "launchUrl": "api/TransferenceUpdate",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Bank.Transaction.Api": {
+    "Bank.Transaction.Manager": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/Account",
-      "applicationUrl": "https://localhost:5020;http://localhost:5021",
+      "launchUrl": "api/TransferenceUpdate",
+      "applicationUrl": "https://localhost:5030;http://localhost:5031",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

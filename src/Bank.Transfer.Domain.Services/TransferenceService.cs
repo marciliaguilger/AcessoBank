@@ -6,12 +6,9 @@ namespace Bank.Transfer.Domain.Services
 {
     public class TransferenceService : Service<Transference>, ITransferenceService
     {
-        private readonly ITransferenceRepository _transferenceRepository;
-
         public TransferenceService(ITransferenceRepository transferenceRepository) 
             : base(transferenceRepository)
         {
-            _transferenceRepository = transferenceRepository;
         }
 
     }
