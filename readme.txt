@@ -5,6 +5,9 @@ docker run -d --hostname acesso-rabbit --name acesso-rabbit -p 15672:15672 -p 56
 Install and run SQL Server on Docker
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 
+Install and run Account API on Docker 
+docker run -d -p 5000:80 baldini/testacesso
+
 
 ============= Interface RabbitMQ
 

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Domain", "src\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj", "{D570C71E-ABB7-4875-B43A-451C4183AA9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Api", "src\Bank.Transfer.Api\Bank.Transfer.Api.csproj", "{1E70A3DF-77A3-4438-BC80-88EB287F6ACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferRequest.Api", "src\Bank.Transfer.Api\Bank.TransferRequest.Api.csproj", "{1E70A3DF-77A3-4438-BC80-88EB287F6ACA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Application", "src\Bank.Transfer.Application\Bank.Transfer.Application.csproj", "{1CBCC599-1A26-4C41-97BD-2A690761DCFE}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Domain.Core",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Domain.Services", "src\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj", "{64F1FBCD-2F7E-4E22-803A-A95DE53B02A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transaction.Api", "src\Bank.Transaction.Api\Bank.Transaction.Api.csproj", "{5CBDC348-928F-4235-BBEC-09348805D6B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferConsumer.Api", "src\Bank.Transaction.Api\Bank.TransferConsumer.Api.csproj", "{5CBDC348-928F-4235-BBEC-09348805D6B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Account.Service", "src\Bank.Account.Service\Bank.Account.Service.csproj", "{85555B78-F9CD-4CEC-9C4C-263B9FBB4ACF}"
 EndProject
@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Messaging.Receiver", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transaction", "Transaction", "{D5FC1177-5AA0-41E8-ABE6-D39C81B0FACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Transaction.Update.Api", "src\Bank.Transaction.Manager\Bank.Transaction.Update.Api.csproj", "{692B813C-7272-46E1-A232-71301B357488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferProcess.Api", "src\Bank.Transaction.Manager\Bank.TransferProcess.Api.csproj", "{692B813C-7272-46E1-A232-71301B357488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
