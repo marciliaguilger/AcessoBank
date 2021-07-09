@@ -12,67 +12,50 @@ using System.Threading.Tasks;
 
 namespace Bank.Transaction.Application.Commands
 {
-    public class TransferenceCommandHandler: 
+    public class TransferenceCommandHandler :
         IRequestHandler<UpdateTransferenceStatusCommand, bool>,
         IRequestHandler<ProcessTransferenceCommand, bool>
     {
-        private readonly ITransferenceService _transferenceService;
         private readonly IAccountService _accountService;
         private readonly ITransferenceUpdateService _transferenceUpdateService;
-        public TransferenceCommandHandler(ITransferenceService transferenceService, 
-                                            IAccountService accountService,
-                                            ITransferenceUpdateService transferenceUpdateService)
+        public TransferenceCommandHandler(IAccountService accountService,
+                                        ITransferenceUpdateService transferenceUpdateService)
         {
-            _transferenceService = transferenceService;
             _accountService = accountService;
             _transferenceUpdateService = transferenceUpdateService;
         }
         public async Task<bool> Handle(UpdateTransferenceStatusCommand message, CancellationToken cancellationToken)
         {
-            var transference = new Transference(message.Id);
-            transference.UpdateStatus(message.TransferenceStatus);
-
-            var exists = _transferenceService.GetById(message.Id);
-            if (exists == null)
-            {
-                //transference.AddEvent(new TransferenceNotFoundEvent(message.Id, TransferenceStatus.Error, "Transference not found"));
-                return false; 
-            }
-
-            _transferenceService.Update(transference);
-            return await _transferenceService.Commit();
+            var transferenceUpdate = new TransferenceToUpdateRequest(message.Id, message.TransferenceStatus);
+            var apiResponse = await _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate);
+            return apiResponse.IsSuccessStatusCode;                        
         }
-        
+
         public async Task<bool> Handle(ProcessTransferenceCommand message, CancellationToken cancellationToken)
         {
-            //var originUserAccount= await _accountService.GetAccountAndBalance(message.AccountOrigin);
             try
             {
+                TransferenceStatus transferenceStatus = TransferenceStatus.Error;
+                string statusDetail;
 
                 var apiResponseOriginUserAccount = await _accountService.GetAccountAndBalance(message.AccountOrigin);
+                var apiResponseDestinationUserAccount = await _accountService.GetAccountAndBalance(message.AccountDestination);
 
 
-                if (!apiResponseOriginUserAccount.IsSuccessStatusCode)
+                if (!apiResponseOriginUserAccount.IsSuccessStatusCode || !apiResponseDestinationUserAccount.IsSuccessStatusCode)
                 {
-                    var transferenceUpdate = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Error, "Error when trying to get account data");
-                    var apiResponse = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate);
-                    
-                    //transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
-                    //transferenceUpdate.UpdateStatusDetail("Error when trying to get account data");
-                    //await _transferenceService.UpdateAsync(transferenceUpdate);
-                    //await _transferenceService.Commit();
+                    statusDetail = "Account not found";
+                    var transferenceUpdate = new TransferenceToUpdateRequest(message.Id, transferenceStatus, statusDetail);
+                    var apiResponse = await _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate);
                     return false;
                 }
+
                 var originUserAccount = apiResponseOriginUserAccount.Content;
                 if (originUserAccount.balance < message.Amount)
                 {
-                    var transferenceUpdate1 = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Error, "Insufficient funds");
-                    var apiResponse1 = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate1);
-
-                    //transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
-                    //transferenceUpdate.UpdateStatusDetail("Insufficient funds");
-                    //await _transferenceService.UpdateAsync(transferenceUpdate);
-                    //await _transferenceService.Commit();
+                    statusDetail = "Insufficient funds";
+                    var transferenceUpdate = new TransferenceToUpdateRequest(message.Id, transferenceStatus, statusDetail);
+                    var apiResponse = await _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate);
                     return false;
                 }
 
@@ -86,46 +69,26 @@ namespace Bank.Transaction.Application.Commands
 
                 if (resultsTransactions.Any(t => t.Equals(false)))
                 {
-                    var transferenceUpdate2 = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Error, "Error when trying to transfer values");
-                    var apiResponse2 = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate2);
+                    statusDetail = "Error when trying to transfer values";
 
-                    //transferenceUpdate.UpdateStatus(TransferenceStatus.Error);
-                    //transferenceUpdate.UpdateStatusDetail("Error when trying to transfer values");
-                    //await _transferenceService.UpdateAsync(transferenceUpdate);
-                    //await _transferenceService.Commit();
+                    var transferenceUpdate = new TransferenceToUpdateRequest(message.Id, transferenceStatus, statusDetail);
+                    var apiResponse = await _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate);
                     return false;
                 }
 
-                var transferenceUpdate3 = new TransferenceToUpdateRequest(message.Id, TransferenceStatus.Confirmed);
-                var apiResponse3 = _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdate3);
+                transferenceStatus = TransferenceStatus.Confirmed;
 
-                //transferenceUpdate = new Transference(message.Id);
-                //transferenceUpdate.UpdateStatus(TransferenceStatus.Confirmed);
-                //await _transferenceService.UpdateAsync(transferenceUpdate);
-                //await _transferenceService.Commit();
-                return true;
+                var transferenceUpdateSucces = new TransferenceToUpdateRequest(message.Id, transferenceStatus);
+                var apiResponseSucces = await _transferenceUpdateService.UpdateTansferenceStatus(transferenceUpdateSucces);
+                return apiResponseSucces.IsSuccessStatusCode;
+
+
             }
             catch (Exception ex)
             {
-                //return false;
+                //gerar log
+                return false;
             }
-
-
-
-            //if (originUserAccount.balance < message.Amount)
-            //    originUserAccount.AddEvent(new InsuficientBalanceEvent(message.Id , ETransferenceStatus.Error, "Insuficient balance"));
-
-            //var resultsTransactions = await Task.WhenAll(
-            //    _accountService.AccountDebit(message.AccountOrigin, message.Amount),
-            //    _accountService.AccountCredit(message.AccountDestination, message.Amount)
-            //);
-
-            //if(resultsTransactions.Any(t => t.Equals(false)))
-            //{
-            //    //rollback?
-            //    return false;
-            //}
-            return true;
         }
     }
 }

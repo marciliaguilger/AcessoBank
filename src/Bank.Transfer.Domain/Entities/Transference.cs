@@ -21,11 +21,6 @@ namespace Bank.Transfer.Domain.Entities
             TransferStatus = transferStatus;
             
         }
-        
-        public Transference(Guid id)
-        {
-            Id = id;
-        }
 
         public Transference() {}
         public String AccountOrigin{ get; private set; }

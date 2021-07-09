@@ -1,5 +1,6 @@
 ﻿using Bank.Transfer.Application.Commands;
 using Bank.Transfer.Application.Dtos;
+using Bank.Transfer.Application.Events;
 using Bank.Transfer.Application.Interfaces;
 using Bank.Transfer.Domain.Core.Communication;
 using Bank.Transfer.Domain.Enums;
@@ -45,16 +46,19 @@ namespace Bank.Transfer.Api.Controllers
 
             return Ok(command.Id);
         }
-        
-        //[HttpPost]
-        //[Route("transfer-update")]
-        //public async Task<bool> Update(TransferenceUpdateDto transferenceDto)
-        //{
-        //    var transference = _transferenceAppService.GetById(transferenceDto.Id);
-        //    transference.UpdateStatus(transferenceDto.Status);
-        //    transference.UpdateStatusDetail(transferenceDto.StatusDetail);
-        //    return await _transferenceAppService.UpdateAsync(transference);
-        //}
+
+        [HttpPost]
+        [Route("transfer-update")]
+        public async Task<IActionResult> Update(TransferenceUpdateDto transferenceDto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            var command = new TransferUpdateCommand(transferenceDto.Id,
+                                                    transferenceDto.Status,
+                                                    transferenceDto.StatusDetail);
+            await _mediatorHandler.SendCommand(command);
+
+            return Ok();
+        }
 
         [HttpGet]
         public IActionResult Get(Guid id)

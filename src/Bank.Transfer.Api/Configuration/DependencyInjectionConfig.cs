@@ -36,6 +36,7 @@ namespace Bank.Transfer.Api.Configuration
             services.AddScoped<IMediatorHandler, MediatorHandler>();
 
             services.AddScoped<IRequestHandler<TransferAmountCommand, bool>, TransferenceCommandHandler>();
+            services.AddScoped<IRequestHandler<TransferUpdateCommand, bool>, TransferenceCommandHandler>();
             services.AddScoped<INotificationHandler<TransferRequestedEvent>, TransferenceEventHandler>();
             
 

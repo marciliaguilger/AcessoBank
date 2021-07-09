@@ -19,7 +19,6 @@ namespace Bank.Messaging.Receive.Receiver
     {
         private IModel _channel;
         private IConnection _connection;
-        //private readonly ITransactionAppService _transactionAppService;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly string _hostname;
         private readonly int _port;
@@ -28,7 +27,6 @@ namespace Bank.Messaging.Receive.Receiver
         private readonly string _password;
 
         public TransferenceRequestReceiver(IServiceScopeFactory scopeFactory,
-                                            //ITransactionAppService transactionAppService, 
                                             IOptions<RabbitMqConfiguration> rabbitMqOptions)
         {
             _scopeFactory = scopeFactory;
@@ -37,7 +35,6 @@ namespace Bank.Messaging.Receive.Receiver
             _queueName = rabbitMqOptions.Value.QueueName;
             _username = rabbitMqOptions.Value.UserName;
             _password = rabbitMqOptions.Value.Password;
-            //_transactionAppService = transactionAppService;
             InitializeRabbitMqListener();
         }
 

@@ -1,68 +1,46 @@
-﻿using Bank.Account.Service.Dtos;
-using Bank.Account.Service.Interfaces;
-using Bank.Transaction.Application.Commands;
+﻿using Bank.Transaction.Application.Commands;
 using Bank.Transfer.Application.Events;
 using Bank.Transfer.Domain.Core.Communication;
-using Bank.Transfer.Domain.Entities;
 using Bank.Transfer.Domain.Enums;
-using Bank.Transfer.Domain.Interfaces.Service;
-using EasyNetQ;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Bank.Transaction.Application.Services
 {
     public class TransactionAppService : ITransactionAppService
     {
 
-        //private readonly IConfiguration _configuration;
-        //private IBus _bus;
-        //private readonly string _rabbitConnectionString;
-        private readonly IMediator _mediator;
+        //private readonly IMediator _mediator;
+        private readonly IMediatorHandler _mediatorHandler;
 
-        public TransactionAppService(
-            //IConfiguration configuration,
-                                    IMediator mediator)
+        public TransactionAppService(IMediatorHandler mediatorHandler)
         {
-            //_configuration = configuration;
-            _mediator = mediator;
-            //_rabbitConnectionString = _configuration
-            //    .GetSection("RabbitMQConfigurations")
-            //    .GetSection("Connection").Value;
-
-            //_bus = RabbitHutch.CreateBus(_rabbitConnectionString);
+            _mediatorHandler = mediatorHandler;
         }
-        //public async Task ListenMessages()
-        //{
-        //    _bus.PubSub.Subscribe<TransferRequestedEvent>("account-transaction", ProccessTransferenceAsync);
-
-        //    //while (!stoppingToken.IsCancellationRequested)
-        //    //{
-        //    //    await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
-        //    //}
-        //    //_bus.Dispose();
-        //}
+        
 
         public  async void ProccessTransferenceAsync(TransferRequestedEvent transference)
         {
             try
             {
-                //await Task.Run(() => _mediator.Send(new ProcessTransferenceCommand(
-                //                                        transference.Id,
-                //                                        transference.AccountDestination,
-                //                                        transference.AccountOrigin,
-                //                                        transference.Amount)));
+                var updateCommand = new UpdateTransferenceStatusCommand(transference.Id, TransferenceStatus.Processing);
+                await _mediatorHandler.SendCommand(updateCommand);
 
-                var result = await _mediator.Send(new ProcessTransferenceCommand(
+
+                var command = new ProcessTransferenceCommand(
                                                         transference.Id,
                                                         transference.AccountDestination,
                                                         transference.AccountOrigin,
-                                                        transference.Amount));
+                                                        transference.Amount);
+
+                await _mediatorHandler.SendCommand(command);
+
+                //var result = await _mediator.Send(new ProcessTransferenceCommand(
+                //                                        transference.Id,
+                //                                        transference.AccountDestination,
+                //                                        transference.AccountOrigin,
+                //                                        transference.Amount));
             }
             catch (Exception ex)
             {

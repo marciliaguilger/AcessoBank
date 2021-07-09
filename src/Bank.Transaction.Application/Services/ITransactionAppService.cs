@@ -9,8 +9,6 @@ namespace Bank.Transaction.Application.Services
 {
     public interface ITransactionAppService
     {
-        //Task ListenMessages();
-
         void ProccessTransferenceAsync(TransferRequestedEvent transference);
     }
 }

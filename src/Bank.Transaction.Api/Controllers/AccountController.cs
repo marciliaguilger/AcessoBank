@@ -18,7 +18,6 @@ namespace Bank.Transaction.Api.Controllers
         [Route("Start")]
         public async Task<IActionResult> Index()
         {
-             //await _transactionAppService.ListenMessages();
             return NoContent();
         }
     }

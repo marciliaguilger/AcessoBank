@@ -54,7 +54,6 @@ namespace Bank.Transfer.Infrastructure.Repository
         public void Update(TEntity obj)
         {
             DbSet.Update(obj);
-            //Db.SaveChanges();
         }
         
         public async Task<bool> UpdateAsync(TEntity obj)

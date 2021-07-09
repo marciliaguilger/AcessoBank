@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace Bank.Transfer.Application.Commands
 {
     public class TransferenceCommandHandler : 
-        IRequestHandler<TransferAmountCommand, bool>
+        IRequestHandler<TransferAmountCommand, bool>,
+        IRequestHandler<TransferUpdateCommand, bool>
     {
         private readonly ITransferenceService _transferenceService;
         public TransferenceCommandHandler(ITransferenceService transferenceService)
@@ -33,6 +34,17 @@ namespace Bank.Transfer.Application.Commands
                                                                 message.AccountOrigin,
                                                                 message.AccountDestination,
                                                                 message.Amount));
+
+            return await _transferenceService.Commit();
+        }
+        public async Task<bool> Handle(TransferUpdateCommand message, CancellationToken cancellationToken)
+        {
+            if (!CommandValidation(message)) return false;
+
+            var transference = _transferenceService.GetById(message.Id);
+            transference.UpdateStatus(message.Status);
+            transference.UpdateStatusDetail(message.StatusDetail);
+            _transferenceService.Update(transference);
 
             return await _transferenceService.Commit();
         }

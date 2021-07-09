@@ -37,9 +37,6 @@ namespace Bank.Transaction.Api.Configuration
             services.AddTransient<IRequestHandler<ProcessTransferenceCommand, bool>, TransferenceCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateTransferenceStatusCommand, bool>, TransferenceCommandHandler>();
 
-            services.AddTransient<INotificationHandler<InsuficientBalanceEvent>, TransferenceEventHandler>();
-            services.AddTransient<INotificationHandler<TransferenceNotFoundEvent>, TransferenceEventHandler>();
-
             return services;
         }
     }

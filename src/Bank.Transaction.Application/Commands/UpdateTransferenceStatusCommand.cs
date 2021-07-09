@@ -7,8 +7,8 @@ namespace Bank.Transaction.Application.Commands
     public class UpdateTransferenceStatusCommand : Command
     {
         public Guid Id { get; private set; }
-        public TransferenceStatus TransferenceStatus { get; private set; } //TODO: TROCAR O NOME DO OBJETO ENUM
-        public string StatusDetail { get; private set; } //TODO: TROCAR O NOME DO OBJETO ENUM
+        public TransferenceStatus TransferenceStatus { get; private set; }
+        public string StatusDetail { get; private set; } 
         public UpdateTransferenceStatusCommand(Guid id, TransferenceStatus transferenceStatus)
         {
             Id = id;
