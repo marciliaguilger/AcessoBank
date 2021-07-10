@@ -14,10 +14,13 @@ namespace Bank.TransferProcess.Application.Commands
             Id = id;
             TransferenceStatus = transferenceStatus;
         }
-
-        public void SetStatusDetail(string statusDetail)
+        
+        public TransferenceStatusUpdateCommand(Guid id, TransferenceStatus transferenceStatus, string statusDetail)
         {
+            Id = id;
+            TransferenceStatus = transferenceStatus;
             StatusDetail = statusDetail;
         }
+       
     }
 }

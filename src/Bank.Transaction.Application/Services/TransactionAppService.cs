@@ -12,16 +12,11 @@ namespace Bank.Transaction.Application.Services
 {
     public class TransactionAppService : ITransactionAppService
     {
-
-
         private readonly ITransferenceProcessService _transferenceProcessService;
-
         public TransactionAppService(ITransferenceProcessService transferenceProcessService)
         {
             _transferenceProcessService = transferenceProcessService;
         }
-        
-
         public  async void ProccessTransferenceAsync(TransferRequestedEvent transferRequestedEvent)
         {
             try
