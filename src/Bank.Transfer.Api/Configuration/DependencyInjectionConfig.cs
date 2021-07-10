@@ -6,6 +6,7 @@ using Bank.Transfer.Application.Options;
 using Bank.Transfer.Application.Queries;
 using Bank.Transfer.Application.Services;
 using Bank.Transfer.Domain.Core.Communication;
+using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Interfaces.Repositories;
 using Bank.Transfer.Domain.Interfaces.Service;
 using Bank.Transfer.Domain.Services;

@@ -8,15 +8,16 @@
     <PackageReference Include="EasyNetQ" Version="6.3.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="4.7.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bank.Account.Service\Bank.Account.Service.csproj" />
-    <ProjectReference Include="..\Bank.Transaction.Application\Bank.Transaction.Application.csproj" />
+    <ProjectReference Include="..\Bank.Account.Service\Bank.TransferProcess.Application.csproj" />
+    <ProjectReference Include="..\Bank.Transaction.Application\Bank.TransferConsumer.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Infrastructure\Bank.Transfer.Infrastructure.csproj" />
-    <ProjectReference Include="..\Brank.Messaging.Receive\Bank.Messaging.Receiver.csproj" />
+    <ProjectReference Include="..\Brank.Messaging.Receive\Bank.TransferConsumer.Receiver.csproj" />
   </ItemGroup>
 
 

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bank.Account.Service\Bank.Account.Service.csproj" />
+    <ProjectReference Include="..\Bank.Account.Service\Bank.TransferProcess.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Application\Bank.TransferRequest.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Core\Bank.Transfer.Domain.Core.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />

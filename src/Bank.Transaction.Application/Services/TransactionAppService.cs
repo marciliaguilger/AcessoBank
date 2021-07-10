@@ -1,6 +1,8 @@
-﻿using Bank.Transaction.Application.Commands;
+﻿//using Bank.Transaction.Application.Commands;
 using Bank.Transfer.Application.Events;
 using Bank.Transfer.Domain.Core.Communication;
+using Bank.Transfer.Domain.Core.Events;
+using Bank.Transfer.Domain.Core.Interface;
 using Bank.Transfer.Domain.Enums;
 using MediatR;
 using System;
@@ -11,37 +13,35 @@ namespace Bank.Transaction.Application.Services
     public class TransactionAppService : ITransactionAppService
     {
 
-        //private readonly IMediator _mediator;
-        private readonly IMediatorHandler _mediatorHandler;
 
-        public TransactionAppService(IMediatorHandler mediatorHandler)
+        private readonly ITransferenceProcessService _transferenceProcessService;
+
+        public TransactionAppService(ITransferenceProcessService transferenceProcessService)
         {
-            _mediatorHandler = mediatorHandler;
+            _transferenceProcessService = transferenceProcessService;
         }
         
 
-        public  async void ProccessTransferenceAsync(TransferRequestedEvent transference)
+        public  async void ProccessTransferenceAsync(TransferRequestedEvent transferRequestedEvent)
         {
             try
             {
-                var updateCommand = new UpdateTransferenceStatusCommand(transference.Id, TransferenceStatus.Processing);
-                //await _mediatorHandler.SendCommand<bool>(updateCommand);
-                await _mediatorHandler.SendCommand<UpdateTransferenceStatusCommand, bool>(updateCommand);
+                var apiResponse = await _transferenceProcessService.ProcessTransferenceRequest(transferRequestedEvent);
+                var teste = "teste";
+                //apiResponse.IsSuccessStatusCode;
 
-                var command = new ProcessTransferenceCommand(
-                                                        transference.Id,
-                                                        transference.AccountDestination,
-                                                        transference.AccountOrigin,
-                                                        transference.Amount);
+                //var updateCommand = new UpdateTransferenceStatusCommand(transference.Id, TransferenceStatus.Processing);
 
-                //await _mediatorHandler.SendCommand(command);
-                await _mediatorHandler.SendCommand<ProcessTransferenceCommand, bool>(command);
+                //await _mediatorHandler.SendCommand<UpdateTransferenceStatusCommand, bool>(updateCommand);
 
-                //var result = await _mediator.Send(new ProcessTransferenceCommand(
+                //var command = new ProcessTransferenceCommand(
                 //                                        transference.Id,
                 //                                        transference.AccountDestination,
                 //                                        transference.AccountOrigin,
-                //                                        transference.Amount));
+                //                                        transference.Amount);
+
+                //await _mediatorHandler.SendCommand<ProcessTransferenceCommand, bool>(command);
+
             }
             catch (Exception ex)
             {
@@ -49,8 +49,6 @@ namespace Bank.Transaction.Application.Services
 
                 Debug.WriteLine(ex.Message);
             }
-
-
         }
     }
 }

@@ -1,17 +1,15 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Bank.Messaging.Receive.Options;
+using Bank.Transaction.Application.Services;
+using Bank.Transfer.Domain.Core.Events;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Bank.Transaction.Application.Services;
-using Bank.Messaging.Receive.Options;
-using Microsoft.Extensions.Options;
-using System.Threading.Tasks;
+using System.Text;
 using System.Threading;
-using Newtonsoft.Json;
-using Bank.Transfer.Application.Events;
-using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace Bank.Messaging.Receive.Receiver
 {
@@ -81,6 +79,8 @@ namespace Bank.Messaging.Receive.Receiver
 
         private void HandleMessage(TransferRequestedEvent transference)
         {
+            //enviar para a api PROCESS
+
             using (var scope = _scopeFactory.CreateScope())
             {
                 var _transactionAppService = scope.ServiceProvider.GetRequiredService<ITransactionAppService>();

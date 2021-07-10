@@ -1,7 +1,6 @@
 using AutoMapper;
 using Bank.Messaging.Receive.Options;
 using Bank.Messaging.Receive.Receiver;
-using Bank.Transaction.Api.BackgroundServices;
 using Bank.Transaction.Api.Configuration;
 using Bank.Transaction.Application.Services;
 using Bank.Transfer.Infrastructure.Context;
@@ -29,16 +28,16 @@ namespace Bank.Transaction.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BankContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<BankContext>(options =>
+            //options.UseSqlServer(
+            //    Configuration.GetConnectionString("DefaultConnection")));
 
 
             var serviceClientSettingsConfig = Configuration.GetSection("RabbitMQConfigurations");
             var serviceClientSettings = serviceClientSettingsConfig.Get<RabbitMqConfiguration>();
             services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
 
-            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(ITransactionAppService).Assembly);
+            //services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(ITransactionAppService).Assembly);
 
             services.AddAutoMapper(typeof(Startup));
 

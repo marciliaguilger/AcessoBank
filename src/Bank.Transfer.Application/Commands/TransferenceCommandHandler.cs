@@ -1,4 +1,5 @@
 ﻿using Bank.Transfer.Application.Events;
+using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Core.Messages;
 using Bank.Transfer.Domain.Entities;
 using Bank.Transfer.Domain.Enums;

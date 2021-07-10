@@ -1,4 +1,5 @@
 ﻿using Bank.Transfer.Application.Options;
+using Bank.Transfer.Domain.Core.Events;
 using EasyNetQ;
 using MediatR;
 using Microsoft.Extensions.Configuration;

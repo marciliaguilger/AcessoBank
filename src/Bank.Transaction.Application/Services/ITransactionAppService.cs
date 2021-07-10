@@ -1,4 +1,5 @@
 ﻿using Bank.Transfer.Application.Events;
+using Bank.Transfer.Domain.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
