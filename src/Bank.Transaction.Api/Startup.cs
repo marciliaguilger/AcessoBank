@@ -1,18 +1,12 @@
 using AutoMapper;
 using Bank.Messaging.Receive.Options;
 using Bank.Messaging.Receive.Receiver;
-using Bank.Transaction.Api.Configuration;
-using Bank.Transaction.Application.Services;
-using Bank.Transfer.Infrastructure.Context;
-using MediatR;
+using Bank.TransferConsumer.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using System.Reflection;
 
 namespace Bank.Transaction.Api
 {
@@ -44,6 +38,7 @@ namespace Bank.Transaction.Api
             services.AddControllers();
 
             services.ResolveDependencies(Configuration);
+
             services.AddHostedService<TransferenceRequestReceiver>();
         }
 

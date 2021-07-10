@@ -1,13 +1,8 @@
+//using Bank.TransferProcess.Api;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Bank.Transaction.Manager
+namespace Bank.TransferProcess.Api
 {
     public class Program
     {

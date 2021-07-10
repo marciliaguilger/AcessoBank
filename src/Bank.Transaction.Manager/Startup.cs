@@ -1,12 +1,11 @@
-using Bank.Transaction.Update.Api.Configuration;
-using MediatR;
+using Bank.TransferProcess.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Bank.Transaction.Manager
+namespace Bank.TransferProcess.Api
 {
     public class Startup
     {
@@ -21,8 +20,8 @@ namespace Bank.Transaction.Manager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(Startup));
             services.ResolveDependencies(Configuration);
+
             services.AddControllers();
         }
 

@@ -27,6 +27,6 @@ http://localhost:5000/swagger/index.html
 ========== RODAR LOCAL
 docker run -d -p 5000:80 0b164b9b1782
 
-docker run -d -p 15672:15672 -p 5672:5672 415614b8c071
+docker run -d -p 15672:15672 -p 5672:5672 485c275e2364
 
 docker run -d  -p 1433:1433 a43c412ed225

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bank.Transaction.Update.Api.Dtos
+namespace Bank.TransferProcess.Api.Dtos
 {
     public class TransferenceUpdateDto
     {

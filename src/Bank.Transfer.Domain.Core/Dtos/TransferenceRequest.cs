@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bank.Account.Service.Dtos
+namespace Bank.Transfer.Domain.Core.Dtos
 {
     public class TransferenceRequest
     {

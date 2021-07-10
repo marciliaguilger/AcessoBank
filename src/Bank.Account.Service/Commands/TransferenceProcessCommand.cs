@@ -1,15 +1,15 @@
 ﻿using Bank.Transfer.Domain.Core.Messages;
 using System;
 
-namespace Bank.Transaction.Application.Commands
+namespace Bank.TransferProcess.Application.Commands
 {
-    public class TransferenceProcessComand : Command<bool>
+    public class TransferenceProcessCommand : Command<bool>
     {
         public Guid Id { get; private set; }
         public String AccountOrigin { get; private set; }
         public String AccountDestination { get; private set; }
         public decimal Amount { get; private set; }
-        public TransferenceProcessComand(Guid id, string accountOrigin, string accountDestination, decimal amount)
+        public TransferenceProcessCommand(Guid id, string accountOrigin, string accountDestination, decimal amount)
         {
             Id = id;
             AccountOrigin = accountOrigin;

@@ -9,8 +9,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bank.Account.Service\Bank.TransferProcess.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Infrastructure\Bank.Transfer.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 

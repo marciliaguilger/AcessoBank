@@ -19,10 +19,10 @@ namespace Bank.Transfer.Domain.Core.Events
             Amount = amount;
         }
 
-        public Guid Id { get; private set; }
-        public String AccountOrigin { get; private set; }
-        public String AccountDestination { get; private set; }
-        public decimal Amount { get; private set; }
+        public Guid Id { get; set; }
+        public String AccountOrigin { get; set; }
+        public String AccountDestination { get; set; }
+        public decimal Amount { get; set; }
 
     }
 }

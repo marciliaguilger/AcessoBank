@@ -1,11 +1,12 @@
-﻿using Bank.Transaction.Update.Api.Dtos;
+﻿using Bank.Transfer.Domain.Core.Communication;
 using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Interfaces.Service;
+using Bank.TransferProcess.Application.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace Bank.Transaction.Manager.Controllers
+namespace Bank.TransferProcess.Api.Controllers
 {
     [ApiController]
     [Route("api/transferenceProcess")]
@@ -13,15 +14,34 @@ namespace Bank.Transaction.Manager.Controllers
     {
         private readonly ILogger<TransferenceProcessController> _logger;
         private readonly ITransferenceService _transferenceService;
-        public TransferenceProcessController(ILogger<TransferenceProcessController> logger, ITransferenceService transferenceService)
+        private readonly IMediatorHandler _mediatorHandler;
+        public TransferenceProcessController(ILogger<TransferenceProcessController> logger,
+                                            ITransferenceService transferenceService,
+                                            IMediatorHandler mediatorHandler)
         {
             _logger = logger;
             _transferenceService = transferenceService;
+            _mediatorHandler = mediatorHandler;
         }
 
         [HttpPost]
         public async Task<bool> Process(TransferRequestedEvent transferRequestedEvent)
         {
+            var transferenceProcessCommand = new TransferenceProcessCommand(transferRequestedEvent.Id, 
+                                                transferRequestedEvent.AccountOrigin,
+                                                transferRequestedEvent.AccountDestination,
+                                                transferRequestedEvent.Amount);
+            
+            await _mediatorHandler.SendCommand<TransferenceProcessCommand, bool>(transferenceProcessCommand);
+
+
+            //var transferenceStatusUpdateCommand = new TransferenceStatusUpdateCommand(transferRequestedEvent.Id, TransferenceStatus.Processing);
+            //await _mediatorHandler.SendCommand<TransferenceStatusUpdateCommand, bool>(transferenceStatusUpdateCommand);
+
+            //var transferenceStatusUpdateCommand = new TransferenceStatusUpdateCommand(transferRequestedEvent.Id, TransferenceStatus.Confirmed);
+            //await _mediatorHandler.SendCommand<TransferenceStatusUpdateCommand, bool>(transferenceStatusUpdateCommand);
+
+
             var teste = transferRequestedEvent;
             return true;
 

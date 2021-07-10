@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using System;
 
-namespace Bank.Transaction.Api.Configuration
+namespace Bank.TransferConsumer.Api.Configuration
 {
     public static class DependencyInjectionConfig
     {
