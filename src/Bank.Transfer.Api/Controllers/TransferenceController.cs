@@ -1,77 +1,55 @@
 ﻿using Bank.Transfer.Application.Commands;
 using Bank.Transfer.Application.Dtos;
-using Bank.Transfer.Application.Events;
-using Bank.Transfer.Application.Interfaces;
 using Bank.Transfer.Application.Queries;
 using Bank.Transfer.Domain.Core.Communication;
-using Bank.Transfer.Domain.Enums;
 using Bank.TransferRequest.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Rebus.Bus;
+using Newtonsoft.Json;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Bank.Transfer.Api.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
+    [Route("api/fund-transfer")]
     public class TransferenceController : ControllerBase
     {
         
-        //private readonly ILogger<TransferenceController> _logger;
-        private readonly ITransferenceAppService _transferenceAppService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public TransferenceController(ITransferenceAppService transferenceAppService,
-                                        IMediatorHandler mediatorHandler)
+        public TransferenceController(IMediatorHandler mediatorHandler)
         {
-            _transferenceAppService = transferenceAppService;
             _mediatorHandler = mediatorHandler;
         }
 
-
-        //public TransferenceController(ILogger<TransferenceController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
         [HttpPost]
-        [Route("fund-transfer")]
+        [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Transfer(TransferenceDto transferenceDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            //if (!ModelState.IsValid) return BadRequest();
 
             var command = new TransferAmountCommand(transferenceDto.AccountOrigin, 
                                                     transferenceDto.AccountDestination,
                                                     transferenceDto.Amount);
-            await _mediatorHandler.SendCommand(command);
+            var transferAmountDto = await _mediatorHandler.SendCommand<TransferAmountCommand, TransferAmountDto>(command);
+            if (transferAmountDto == null) return BadRequest();
 
-            return Ok(command.Id);
+            return Ok(JsonConvert.SerializeObject(transferAmountDto));
         }
 
-        //[HttpPost]
-        //[Route("transfer-update")]
-        //public async Task<IActionResult> Update(TransferenceUpdateDto transferenceDto)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest();
-        //    var command = new TransferUpdateCommand(transferenceDto.Id,
-        //                                            transferenceDto.Status,
-        //                                            transferenceDto.StatusDetail);
-        //    await _mediatorHandler.SendCommand(command);
-
-        //    return Ok();
-        //}
-
         [HttpGet]
-        [Route("fund-transfer/{id}")]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(RequestStatusDto), (int) HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Get(Guid id)
         {
             var requestStatusQuery = new RequestStatusQuery(id);
-            var requestStatusDto = await _mediatorHandler.GetQuery<RequestStatusQuery, RequestStatusDto>(requestStatusQuery);
+            var requestStatusDto = await _mediatorHandler.SendCommand<RequestStatusQuery, RequestStatusDto>(requestStatusQuery);
 
             if (requestStatusDto == null) return NoContent();
-            return Ok(requestStatusDto);
+            return Ok(JsonConvert.SerializeObject(requestStatusDto));
         }
     }
 }

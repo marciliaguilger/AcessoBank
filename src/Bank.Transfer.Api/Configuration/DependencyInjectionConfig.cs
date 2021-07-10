@@ -30,8 +30,7 @@ namespace Bank.Transfer.Api.Configuration
             services.AddScoped<ITransferenceAppService, TransferenceAppService>();
 
             services.AddScoped<IMediatorHandler, MediatorHandler>();
-            services.AddScoped<IRequestHandler<TransferAmountCommand, bool>, TransferenceCommandHandler>();
-            services.AddScoped<IRequestHandler<TransferUpdateCommand, bool>, TransferenceCommandHandler>();
+            services.AddScoped<IRequestHandler<TransferAmountCommand, TransferAmountDto>, TransferenceCommandHandler>();
             services.AddScoped<IRequestHandler<RequestStatusQuery, RequestStatusDto>, RequestStatusQueryHandler>();
             services.AddScoped<INotificationHandler<TransferRequestedEvent>, TransferenceEventHandler>();
 

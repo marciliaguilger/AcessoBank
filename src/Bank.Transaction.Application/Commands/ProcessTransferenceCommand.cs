@@ -3,7 +3,7 @@ using System;
 
 namespace Bank.Transaction.Application.Commands
 {
-    public class ProcessTransferenceCommand : Command
+    public class ProcessTransferenceCommand : Command<bool>
     {
         public Guid Id { get; private set; }
         public String AccountOrigin { get; private set; }

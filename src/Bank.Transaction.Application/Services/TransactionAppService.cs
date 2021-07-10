@@ -25,8 +25,8 @@ namespace Bank.Transaction.Application.Services
             try
             {
                 var updateCommand = new UpdateTransferenceStatusCommand(transference.Id, TransferenceStatus.Processing);
-                await _mediatorHandler.SendCommand(updateCommand);
-
+                //await _mediatorHandler.SendCommand<bool>(updateCommand);
+                await _mediatorHandler.SendCommand<UpdateTransferenceStatusCommand, bool>(updateCommand);
 
                 var command = new ProcessTransferenceCommand(
                                                         transference.Id,
@@ -34,7 +34,8 @@ namespace Bank.Transaction.Application.Services
                                                         transference.AccountOrigin,
                                                         transference.Amount);
 
-                await _mediatorHandler.SendCommand(command);
+                //await _mediatorHandler.SendCommand(command);
+                await _mediatorHandler.SendCommand<ProcessTransferenceCommand, bool>(command);
 
                 //var result = await _mediator.Send(new ProcessTransferenceCommand(
                 //                                        transference.Id,

@@ -4,7 +4,7 @@ using System;
 
 namespace Bank.Transaction.Application.Commands
 {
-    public class UpdateTransferenceStatusCommand : Command
+    public class UpdateTransferenceStatusCommand : Command<bool>
     {
         public Guid Id { get; private set; }
         public TransferenceStatus TransferenceStatus { get; private set; }

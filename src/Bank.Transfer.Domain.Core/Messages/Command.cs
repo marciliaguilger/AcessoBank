@@ -4,7 +4,8 @@ using System;
 
 namespace Bank.Transfer.Domain.Core.Messages
 {
-    public abstract class Command : Message, IRequest<bool>
+    //public abstract class Command : Message, IRequest<bool>
+    public abstract class Command<R> : Message, IRequest<R>
     {
         public DateTime Timestamp { get; private set; }
         public ValidationResult ValidationResult { get; set; }

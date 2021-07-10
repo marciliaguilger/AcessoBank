@@ -23,8 +23,8 @@ namespace Bank.Transfer.Infrastructure.Context
         public async Task<bool> Commit()
         {
             await _mediatorHandler.PublishEvents(this);
-
-            return await base.SaveChangesAsync() > 0;
+            await base.SaveChangesAsync();
+            return true;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

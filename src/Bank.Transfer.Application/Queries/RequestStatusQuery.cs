@@ -7,7 +7,8 @@ using System.Text;
 
 namespace Bank.Transfer.Application.Queries
 {
-    public class RequestStatusQuery : IRequest<RequestStatusDto>
+    //public class RequestStatusQuery : IRequest<RequestStatusDto>
+    public class RequestStatusQuery : Command<RequestStatusDto>
     {
         public Guid TransactionId { get; set; }
 
