@@ -2,8 +2,10 @@
 using Bank.Transfer.Application.Dtos;
 using Bank.Transfer.Application.Events;
 using Bank.Transfer.Application.Interfaces;
+using Bank.Transfer.Application.Queries;
 using Bank.Transfer.Domain.Core.Communication;
 using Bank.Transfer.Domain.Enums;
+using Bank.TransferRequest.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Rebus.Bus;
@@ -39,6 +41,7 @@ namespace Bank.Transfer.Api.Controllers
         public async Task<IActionResult> Transfer(TransferenceDto transferenceDto)
         {
             if (!ModelState.IsValid) return BadRequest();
+
             var command = new TransferAmountCommand(transferenceDto.AccountOrigin, 
                                                     transferenceDto.AccountDestination,
                                                     transferenceDto.Amount);
@@ -47,26 +50,28 @@ namespace Bank.Transfer.Api.Controllers
             return Ok(command.Id);
         }
 
-        [HttpPost]
-        [Route("transfer-update")]
-        public async Task<IActionResult> Update(TransferenceUpdateDto transferenceDto)
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            var command = new TransferUpdateCommand(transferenceDto.Id,
-                                                    transferenceDto.Status,
-                                                    transferenceDto.StatusDetail);
-            await _mediatorHandler.SendCommand(command);
+        //[HttpPost]
+        //[Route("transfer-update")]
+        //public async Task<IActionResult> Update(TransferenceUpdateDto transferenceDto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest();
+        //    var command = new TransferUpdateCommand(transferenceDto.Id,
+        //                                            transferenceDto.Status,
+        //                                            transferenceDto.StatusDetail);
+        //    await _mediatorHandler.SendCommand(command);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [HttpGet]
-        public IActionResult Get(Guid id)
+        [Route("fund-transfer/{id}")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            var transference = _transferenceAppService.GetById(id);
-            return Ok(transference);
+            var requestStatusQuery = new RequestStatusQuery(id);
+            var requestStatusDto = await _mediatorHandler.GetQuery<RequestStatusQuery, RequestStatusDto>(requestStatusQuery);
 
+            if (requestStatusDto == null) return NoContent();
+            return Ok(requestStatusDto);
         }
     }
 }

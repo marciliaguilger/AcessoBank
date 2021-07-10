@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bank.Transaction.Application\Bank.Transaction.Application.csproj" />
-    <ProjectReference Include="..\Bank.Transfer.Application\Bank.Transfer.Application.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Application\Bank.TransferRequest.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Core\Bank.Transfer.Domain.Core.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />

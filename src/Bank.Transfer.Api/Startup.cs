@@ -2,6 +2,7 @@ using AutoMapper;
 using Bank.Transfer.Api.Configuration;
 using Bank.Transfer.Application.Options;
 using Bank.Transfer.Infrastructure.Context;
+using Bank.TransferRequest.Api.Configuration;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,20 +26,22 @@ namespace Bank.Transfer.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BankContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
-            
-            services.AddAutoMapper(typeof(Startup));
-
-            services.AddMediatR(typeof(Startup));
-
             services.AddControllers();
+            services.AddSwaggerConfiguration();
+            services.ResolveDependencies(Configuration);
 
-            var serviceClientSettingsConfig = Configuration.GetSection("RabbitMQConfigurations");
-            services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
+            //services.AddDbContext<BankContext>(options =>
+            //options.UseSqlServer(
+            //    Configuration.GetConnectionString("DefaultConnection")));
+            
+            //services.AddAutoMapper(typeof(Startup));
 
-            services.ResolveDependencies();
+            //services.AddMediatR(typeof(Startup));
+
+
+            //var serviceClientSettingsConfig = Configuration.GetSection("RabbitMQConfigurations");
+            //services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,22 +51,14 @@ namespace Bank.Transfer.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bank Transference API");
-            });
-
             app.UseRouting();
-
+            app.UseHttpsRedirection();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            app.UseSwaggerSetup();
         }
     }
 }

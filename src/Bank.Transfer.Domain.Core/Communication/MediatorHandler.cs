@@ -13,6 +13,11 @@ namespace Bank.Transfer.Domain.Core.Communication
             _mediator = mediator;
         }
 
+        public async Task<R> GetQuery<T, R>(T query)
+        {
+            return (R)await _mediator.Send(query);
+        }
+
         public async Task PublishEvent<T>(T evento) where T : Event
         {
             await _mediator.Publish(evento);

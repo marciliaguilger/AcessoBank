@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Domain", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferRequest.Api", "src\Bank.Transfer.Api\Bank.TransferRequest.Api.csproj", "{1E70A3DF-77A3-4438-BC80-88EB287F6ACA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Application", "src\Bank.Transfer.Application\Bank.Transfer.Application.csproj", "{1CBCC599-1A26-4C41-97BD-2A690761DCFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferRequest.Application", "src\Bank.Transfer.Application\Bank.TransferRequest.Application.csproj", "{1CBCC599-1A26-4C41-97BD-2A690761DCFE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Transfer.Domain.Core", "src\Bank.Transfer.Domain.Core\Bank.Transfer.Domain.Core.csproj", "{8DE32AAC-867E-4EF3-B7C4-CE32D9C31FAE}"
 EndProject

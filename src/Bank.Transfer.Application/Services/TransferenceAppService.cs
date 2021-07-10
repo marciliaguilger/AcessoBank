@@ -4,6 +4,7 @@ using Bank.Transfer.Application.Dtos;
 using Bank.Transfer.Application.Interfaces;
 using Bank.Transfer.Domain.Entities;
 using Bank.Transfer.Domain.Interfaces.Service;
+using Bank.TransferRequest.Application.Dtos;
 using System;
 using System.Collections.Generic;
 
@@ -31,6 +32,11 @@ namespace Bank.Transfer.Application.Services
         public IEnumerable<TransferenceDto> GetAll()
         {
             return _transferenceService.GetAll().ProjectTo<TransferenceDto>(_mapper.ConfigurationProvider);
+        }
+
+        public RequestStatusDto GetRequestStatusById(Guid id)
+        {
+            return _mapper.Map<RequestStatusDto>(_transferenceService.GetById(id));
         }
 
         public TransferenceDto GetById(Guid id)

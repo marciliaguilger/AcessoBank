@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bank.Transfer.Application\Bank.Transfer.Application.csproj" />
+    <ProjectReference Include="..\Bank.Transfer.Application\Bank.TransferRequest.Application.csproj" />
   </ItemGroup>
 
 </Project>
