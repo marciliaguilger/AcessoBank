@@ -13,8 +13,6 @@ namespace Bank.Transfer.Domain.Services
             : base(transferenceRepository)
         {
         }
-
-
         public async Task UpdateStatus(Guid id, TransferenceStatus transferenceStatus, string statusDetail)
         {
             var transference = GetById(id);

@@ -4,6 +4,7 @@ using Bank.Transfer.Domain.Interfaces.Service;
 using Bank.TransferProcess.Application.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Bank.TransferProcess.Api.Controllers
@@ -25,39 +26,22 @@ namespace Bank.TransferProcess.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> Process(TransferRequestedEvent transferRequestedEvent)
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Process(TransferRequestedEvent transferRequestedEvent)
         {
             var transferenceProcessCommand = new TransferenceProcessCommand(transferRequestedEvent.Id, 
                                                 transferRequestedEvent.AccountOrigin,
                                                 transferRequestedEvent.AccountDestination,
                                                 transferRequestedEvent.Amount);
             
-            await _mediatorHandler.SendCommand<TransferenceProcessCommand, bool>(transferenceProcessCommand);
+            var result = await _mediatorHandler.SendCommand<TransferenceProcessCommand, bool>(transferenceProcessCommand);
 
+            if (!result) return BadRequest();
 
-            //var transferenceStatusUpdateCommand = new TransferenceStatusUpdateCommand(transferRequestedEvent.Id, TransferenceStatus.Processing);
-            //await _mediatorHandler.SendCommand<TransferenceStatusUpdateCommand, bool>(transferenceStatusUpdateCommand);
-
-            //var transferenceStatusUpdateCommand = new TransferenceStatusUpdateCommand(transferRequestedEvent.Id, TransferenceStatus.Confirmed);
-            //await _mediatorHandler.SendCommand<TransferenceStatusUpdateCommand, bool>(transferenceStatusUpdateCommand);
-
-
-            var teste = transferRequestedEvent;
-            return true;
-
-            //var transference = _transferenceService.GetById(transferenceDto.Id);
-            //transference.UpdateStatus(transferenceDto.Status);
-            //transference.UpdateStatusDetail(transferenceDto.StatusDetail);
-            //return await _transferenceService.UpdateAsync(transference);
+            return Ok();
+            
         }
-        //[HttpPost]
-        //[Route("update-status")]
-        //public async Task<bool> Update(TransferenceUpdateDto transferenceDto)
-        //{
-        //    var transference = _transferenceService.GetById(transferenceDto.Id);
-        //    transference.UpdateStatus(transferenceDto.Status);
-        //    transference.UpdateStatusDetail(transferenceDto.StatusDetail);
-        //    return await _transferenceService.UpdateAsync(transference);
-        //}
+       
     }
 }

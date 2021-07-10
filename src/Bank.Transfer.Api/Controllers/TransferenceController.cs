@@ -28,8 +28,6 @@ namespace Bank.Transfer.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Transfer(TransferenceDto transferenceDto)
         {
-            //if (!ModelState.IsValid) return BadRequest();
-
             var command = new TransferAmountCommand(transferenceDto.AccountOrigin, 
                                                     transferenceDto.AccountDestination,
                                                     transferenceDto.Amount);

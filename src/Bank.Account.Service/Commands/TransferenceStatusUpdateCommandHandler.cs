@@ -17,7 +17,7 @@ namespace Bank.TransferProcess.Application.Commands
         }
         public async Task<bool> Handle(TransferenceStatusUpdateCommand message, CancellationToken cancellationToken)
         {
-            await _transferenceService.UpdateStatus(message.Id, TransferenceStatus.Processing);
+            await _transferenceService.UpdateStatus(message.Id, message.TransferenceStatus,message.StatusDetail);
             return true;
         }
     }
