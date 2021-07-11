@@ -1,7 +1,7 @@
-﻿using Bank.Transfer.Application.Commands;
+﻿using Bank.TransferRequest.Application.Commands;
 using FluentValidation;
 
-namespace Bank.Transfer.Application.Validations
+namespace Bank.TransferRequest.Application.Validations
 {
 
     public class TransferAmountCommandValidation : AbstractValidator<TransferAmountCommand>

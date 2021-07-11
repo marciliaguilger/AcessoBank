@@ -1,14 +1,12 @@
-﻿using Bank.Transfer.Application.Validations;
-using Bank.Transfer.Domain.Core.Messages;
+﻿using Bank.Transfer.Domain.Core.Messages;
 using Bank.Transfer.Domain.Enums;
 using Bank.TransferRequest.Application.Dtos;
-using MediatR;
+using Bank.TransferRequest.Application.Validations;
 using System;
 
-namespace Bank.Transfer.Application.Commands
+namespace Bank.TransferRequest.Application.Commands
 {
     public class TransferAmountCommand : Command<TransferAmountDto>
-    //public class TransferAmountCommand : IRequest<TransferAmountDto>
     {
         public Guid Id { get; private set; }
         public String AccountOrigin { get; private set; }

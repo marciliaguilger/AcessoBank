@@ -1,11 +1,8 @@
 ﻿using Bank.Transfer.Domain.Core.Messages;
 using Bank.TransferRequest.Application.Dtos;
-using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Bank.Transfer.Application.Queries
+namespace Bank.TransferRequest.Application.Queries
 {
     //public class RequestStatusQuery : IRequest<RequestStatusDto>
     public class RequestStatusQuery : Command<RequestStatusDto>

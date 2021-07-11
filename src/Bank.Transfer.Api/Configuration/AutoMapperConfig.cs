@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bank.Transfer.Application.Dtos;
 using Bank.Transfer.Domain.Entities;
 using Bank.TransferRequest.Application.Dtos;
 

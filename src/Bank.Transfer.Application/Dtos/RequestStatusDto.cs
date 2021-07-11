@@ -1,5 +1,4 @@
-﻿using Bank.Transfer.Domain.Enums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bank.TransferRequest.Application.Dtos
 {

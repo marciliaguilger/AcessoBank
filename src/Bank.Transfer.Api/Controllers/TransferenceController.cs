@@ -1,8 +1,7 @@
-﻿using Bank.Transfer.Application.Commands;
-using Bank.Transfer.Application.Dtos;
-using Bank.Transfer.Application.Queries;
-using Bank.Transfer.Domain.Core.Communication;
+﻿using Bank.Transfer.Domain.Core.Communication;
+using Bank.TransferRequest.Application.Commands;
 using Bank.TransferRequest.Application.Dtos;
+using Bank.TransferRequest.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;

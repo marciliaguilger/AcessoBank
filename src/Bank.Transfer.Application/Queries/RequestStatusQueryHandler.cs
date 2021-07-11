@@ -1,6 +1,5 @@
-﻿using Bank.Transfer.Application.Interfaces;
-using Bank.Transfer.Application.Queries;
-using Bank.TransferRequest.Application.Dtos;
+﻿using Bank.TransferRequest.Application.Dtos;
+using Bank.TransferRequest.Application.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

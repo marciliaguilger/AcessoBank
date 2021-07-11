@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bank.Transfer.Application.Events
+namespace Bank.TransferRequest.Application.Events
 {
     public class TransferenceEventHandler : INotificationHandler<TransferRequestedEvent>
     {

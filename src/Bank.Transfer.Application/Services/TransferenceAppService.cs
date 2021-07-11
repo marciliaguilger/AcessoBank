@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Bank.Transfer.Application.Dtos;
-using Bank.Transfer.Application.Interfaces;
+using Bank.TransferRequest.Application.Dtos;
 using Bank.Transfer.Domain.Entities;
 using Bank.Transfer.Domain.Interfaces.Service;
-using Bank.TransferRequest.Application.Dtos;
 using System;
 using System.Collections.Generic;
+using Bank.TransferRequest.Application.Interfaces;
 
-namespace Bank.Transfer.Application.Services
+namespace Bank.TransferRequest.Application.Services
 {
     public class TransferenceAppService : ITransferenceAppService
     {
