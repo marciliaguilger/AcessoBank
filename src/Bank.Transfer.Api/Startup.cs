@@ -1,4 +1,3 @@
-using Bank.Transfer.Api.Configuration;
 using Bank.TransferRequest.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Bank.Transfer.Api
+namespace Bank.TransferRequest.Api
 {
     public class Startup
     {

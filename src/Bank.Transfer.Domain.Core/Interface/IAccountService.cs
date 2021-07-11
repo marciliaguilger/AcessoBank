@@ -1,9 +1,6 @@
 ﻿using Bank.Transfer.Domain.Core.Dtos;
 using Refit;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bank.Transfer.Domain.Core.Interface

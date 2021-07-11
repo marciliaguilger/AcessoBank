@@ -1,6 +1,5 @@
 ﻿using Bank.Transfer.Domain.Core.Events;
 using Refit;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Bank.Transfer.Domain.Core.Interface

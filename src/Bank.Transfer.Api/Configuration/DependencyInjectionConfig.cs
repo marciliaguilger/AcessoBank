@@ -19,7 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bank.Transfer.Api.Configuration
+namespace Bank.TransferRequest.Api.Configuration
 {
     public static class DependencyInjectionConfig
     {

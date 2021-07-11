@@ -3,7 +3,7 @@ using Bank.Transfer.Application.Dtos;
 using Bank.Transfer.Domain.Entities;
 using Bank.TransferRequest.Application.Dtos;
 
-namespace Bank.Transfer.Api.Configuration
+namespace Bank.TransferRequest.Api.Configuration
 {
     public class AutoMapperConfig : Profile
     {
