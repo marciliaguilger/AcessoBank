@@ -6,8 +6,6 @@ using Bank.TransferProcess.Application.Commands;
 using Bank.TransferProcess.Application.Dtos;
 using Bank.TransferProcess.Application.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bank.TransferProcess.Application.Service

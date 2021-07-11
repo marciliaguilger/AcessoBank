@@ -2,13 +2,13 @@
 using Bank.Transfer.Application.Commands;
 using Bank.Transfer.Application.Events;
 using Bank.Transfer.Application.Interfaces;
-using Bank.Transfer.Application.Options;
 using Bank.Transfer.Application.Queries;
 using Bank.Transfer.Application.Services;
 using Bank.Transfer.Domain.Core.Communication;
 using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Interfaces.Repositories;
 using Bank.Transfer.Domain.Interfaces.Service;
+using Bank.Transfer.Domain.Options;
 using Bank.Transfer.Domain.Services;
 using Bank.Transfer.Infrastructure.Context;
 using Bank.Transfer.Infrastructure.Repository;

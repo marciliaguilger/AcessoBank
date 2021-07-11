@@ -1,4 +1,4 @@
-﻿namespace Bank.Transfer.Application.Options
+﻿namespace Bank.Transfer.Domain.Options
 {
     public class RabbitMqConfiguration
     {

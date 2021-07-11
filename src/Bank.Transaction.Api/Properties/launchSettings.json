@@ -20,7 +20,7 @@
     "Bank.Transaction.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/Account",
+      "launchUrl": "",
       "applicationUrl": "https://localhost:5020;http://localhost:5021",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -1,8 +1,6 @@
-﻿using Bank.Transfer.Application.Options;
-using Bank.Transfer.Domain.Core.Events;
-using EasyNetQ;
+﻿using Bank.Transfer.Domain.Core.Events;
+using Bank.Transfer.Domain.Options;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -15,9 +13,7 @@ namespace Bank.Transfer.Application.Events
 {
     public class TransferenceEventHandler : INotificationHandler<TransferRequestedEvent>
     {
-        //private readonly IConfiguration _configuration;
-        //private readonly string _rabbitConnectionString;
-        //TODO: ARRUMAR
+        
         private readonly string _hostname;
         private readonly string _password;
         private readonly string _queueName;
@@ -49,11 +45,6 @@ namespace Bank.Transfer.Application.Events
                     channel.BasicPublish(exchange: "", routingKey: _queueName, basicProperties: null, body: body);
                 }
             }
-
-
-            //var bus = RabbitHutch.CreateBus(_rabbitConnectionString);
-            //bus.PubSub.Publish<TransferRequestedEvent>(notification,"transfer-amount");
-
             return Task.CompletedTask;
         }
 
@@ -64,6 +55,7 @@ namespace Bank.Transfer.Application.Events
                 var factory = new ConnectionFactory
                 {
                     HostName = _hostname,
+                    Port = _port,
                     UserName = _username,
                     Password = _password
                 };
@@ -71,6 +63,7 @@ namespace Bank.Transfer.Application.Events
             }
             catch (Exception ex)
             {
+                //GERAR LOG
                 Console.WriteLine($"Could not create connection: {ex.Message}");
             }
         }

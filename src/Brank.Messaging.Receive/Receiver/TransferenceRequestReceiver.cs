@@ -1,6 +1,6 @@
-﻿using Bank.Messaging.Receive.Options;
-using Bank.Transaction.Application.Services;
+﻿using Bank.Transaction.Application.Interfaces;
 using Bank.Transfer.Domain.Core.Events;
+using Bank.Transfer.Domain.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -79,13 +79,10 @@ namespace Bank.Messaging.Receive.Receiver
 
         private void HandleMessage(TransferRequestedEvent transference)
         {
-            //enviar para a api PROCESS
-
             using (var scope = _scopeFactory.CreateScope())
             {
                 var _transactionAppService = scope.ServiceProvider.GetRequiredService<ITransactionAppService>();
                 _transactionAppService.ProccessTransferenceAsync(transference);
-
             }
         }
 
