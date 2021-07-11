@@ -23,7 +23,7 @@ namespace Bank.TransferProcess.Application.Service
 
         public async Task<bool> Process(TransferenceProcessDto transferenceProcessDto)
         {
-            var result = await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Processing);
+            await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Processing);
             var originAccount = await ValidateAccountAsync(transferenceProcessDto.Id, transferenceProcessDto.AccountOrigin);
             if (originAccount ==null)
             {
@@ -38,8 +38,8 @@ namespace Bank.TransferProcess.Application.Service
                 //gravar log
                 return false;
             }
-            result = await ValidateFunder(originAccount, transferenceProcessDto.Amount);
-            if(!result)
+            var validateFunder = await ValidateFunder(originAccount, transferenceProcessDto.Amount);
+            if(!validateFunder)
             {
                 await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Error, "Insuficient founds");
                 //gravar log

@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.TransferRequest.Applic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A98459C-A185-4377-9FCA-034326ECC4BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.TransferProcess.Application.Tests", "src\Tests\Bank.TransferProcess.Application.Tests\Bank.TransferProcess.Application.Tests.csproj", "{E5E802B5-3440-491C-AC3E-84A1090DAF7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{46DFDEC4-9A1C-409C-B475-9EA9FA21776B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5E802B5-3440-491C-AC3E-84A1090DAF7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E802B5-3440-491C-AC3E-84A1090DAF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E802B5-3440-491C-AC3E-84A1090DAF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E802B5-3440-491C-AC3E-84A1090DAF7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +117,8 @@ Global
 		{07799B56-1648-4167-A33E-6F61E0A79C60} = {D84AB7D8-55D9-464F-B07C-461079892B1D}
 		{164C8B67-E7AD-4B31-B086-D292C7F841BE} = {4A98459C-A185-4377-9FCA-034326ECC4BC}
 		{4A98459C-A185-4377-9FCA-034326ECC4BC} = {5358AF62-B4A7-4120-AF48-92F3437C7D18}
+		{E5E802B5-3440-491C-AC3E-84A1090DAF7E} = {46DFDEC4-9A1C-409C-B475-9EA9FA21776B}
+		{46DFDEC4-9A1C-409C-B475-9EA9FA21776B} = {D84AB7D8-55D9-464F-B07C-461079892B1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F870A11-3F8B-4EBD-BB81-9C94B4BD4DCB}

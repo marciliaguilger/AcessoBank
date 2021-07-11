@@ -34,7 +34,7 @@ namespace Bank.TransferRequest.Application.Tests.Commands
             
         }
         
-        [Fact(DisplayName = "Transfer amount - success")]
+        [Fact(DisplayName = "Transfer amount - not succes")]
         [Trait("Category", "Transfer Request - Command Handlers")]
         public async Task TransferAmountCommandHandler_TransferRequest_ShouldNotBeSuccess()
         {
