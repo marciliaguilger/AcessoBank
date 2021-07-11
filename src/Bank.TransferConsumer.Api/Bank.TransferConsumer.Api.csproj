@@ -12,12 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bank.Account.Service\Bank.TransferProcess.Application.csproj" />
-    <ProjectReference Include="..\Bank.Transaction.Application\Bank.TransferConsumer.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain\Bank.Transfer.Domain.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Infrastructure\Bank.Transfer.Infrastructure.csproj" />
-    <ProjectReference Include="..\Brank.Messaging.Receive\Bank.TransferConsumer.Receiver.csproj" />
+    <ProjectReference Include="..\Bank.TransferConsumer.Application\Bank.TransferConsumer.Application.csproj" />
+    <ProjectReference Include="..\Bank.TransferConsumer.Receiver\Bank.TransferConsumer.Receiver.csproj" />
   </ItemGroup>
 
 
