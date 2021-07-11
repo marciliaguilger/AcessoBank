@@ -21,7 +21,6 @@ namespace Bank.Transfer.Infrastructure.Repository
         public void Add(TEntity obj)
         {
             DbSet.Add(obj);
-            Db.SaveChanges();
         }
 
         public void Dispose()

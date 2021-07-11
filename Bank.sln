@@ -33,6 +33,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferProcess.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.TransferProcess.Api", "src\Bank.TransferProcess.Api\Bank.TransferProcess.Api.csproj", "{07799B56-1648-4167-A33E-6F61E0A79C60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.TransferRequest.Application.Tests", "src\Tests\Bank.TransferRequest.Application.Tests\Bank.TransferRequest.Application.Tests.csproj", "{164C8B67-E7AD-4B31-B086-D292C7F841BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A98459C-A185-4377-9FCA-034326ECC4BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,10 @@ Global
 		{07799B56-1648-4167-A33E-6F61E0A79C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07799B56-1648-4167-A33E-6F61E0A79C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07799B56-1648-4167-A33E-6F61E0A79C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164C8B67-E7AD-4B31-B086-D292C7F841BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +107,8 @@ Global
 		{D04F997D-962B-45A8-82FE-13F9E6AD7F71} = {AF293F59-4C2B-45B0-8E2E-57B3FE347000}
 		{65E61401-5208-4B77-9895-84E5ADD8F8C5} = {D84AB7D8-55D9-464F-B07C-461079892B1D}
 		{07799B56-1648-4167-A33E-6F61E0A79C60} = {D84AB7D8-55D9-464F-B07C-461079892B1D}
+		{164C8B67-E7AD-4B31-B086-D292C7F841BE} = {4A98459C-A185-4377-9FCA-034326ECC4BC}
+		{4A98459C-A185-4377-9FCA-034326ECC4BC} = {5358AF62-B4A7-4120-AF48-92F3437C7D18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F870A11-3F8B-4EBD-BB81-9C94B4BD4DCB}

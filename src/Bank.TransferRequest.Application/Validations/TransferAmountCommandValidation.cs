@@ -6,6 +6,7 @@ namespace Bank.TransferRequest.Application.Validations
 
     public class TransferAmountCommandValidation : AbstractValidator<TransferAmountCommand>
     {
+        public static string NegativeAmountMessage => "Amount can not be zero";
 
         public TransferAmountCommandValidation()
         {

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Bank.TransferRequest.Application.Commands
 {
-    public class TransferenceCommandHandler :
+    public class TransferAmountCommandHandler :
         IRequestHandler<TransferAmountCommand, TransferAmountDto>
     {
         private readonly ITransferenceService _transferenceService;
-        public TransferenceCommandHandler(ITransferenceService transferenceService)
+        public TransferAmountCommandHandler(ITransferenceService transferenceService)
         {
             _transferenceService = transferenceService;
         }
