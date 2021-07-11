@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bank.Account.Service\Bank.TransferProcess.Application.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Domain.Services\Bank.Transfer.Domain.Services.csproj" />
     <ProjectReference Include="..\Bank.Transfer.Infrastructure\Bank.Transfer.Infrastructure.csproj" />
+    <ProjectReference Include="..\Bank.TransferProcess.Application\Bank.TransferProcess.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
