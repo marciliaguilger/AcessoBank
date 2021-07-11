@@ -1,6 +1,6 @@
 ﻿using Bank.Transfer.Domain.Core.Events;
 
-namespace Bank.Transaction.Application.Interfaces
+namespace Bank.TransferConsumer.Application.Interfaces
 {
     public interface ITransactionAppService
     {

@@ -1,6 +1,5 @@
 using AutoMapper;
-using Bank.Messaging.Receive.Receiver;
-using Bank.Transfer.Domain.Options;
+using Bank.TransferConsumer.Receiver;
 using Bank.TransferConsumer.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Bank.Transaction.Api
+namespace Bank.TransferConsumer.Api
 {
     public class Startup
     {
@@ -25,8 +24,6 @@ namespace Bank.Transaction.Api
             services.ResolveDependencies(Configuration);
             services.AddHostedService<TransferenceRequestReceiver>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

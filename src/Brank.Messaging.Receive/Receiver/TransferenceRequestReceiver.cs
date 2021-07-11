@@ -1,6 +1,6 @@
-﻿using Bank.Transaction.Application.Interfaces;
-using Bank.Transfer.Domain.Core.Events;
+﻿using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Options;
+using Bank.TransferConsumer.Application.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bank.Messaging.Receive.Receiver
+namespace Bank.TransferConsumer.Receiver
 {
     public class TransferenceRequestReceiver : BackgroundService
     {

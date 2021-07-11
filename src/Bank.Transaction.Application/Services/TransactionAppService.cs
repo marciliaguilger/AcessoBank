@@ -1,10 +1,10 @@
-﻿using Bank.Transaction.Application.Interfaces;
-using Bank.Transfer.Domain.Core.Events;
+﻿using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Core.Interface;
+using Bank.TransferConsumer.Application.Interfaces;
 using System;
 using System.Diagnostics;
 
-namespace Bank.Transaction.Application.Services
+namespace Bank.TransferConsumer.Application.Services
 {
     public class TransactionAppService : ITransactionAppService
     {

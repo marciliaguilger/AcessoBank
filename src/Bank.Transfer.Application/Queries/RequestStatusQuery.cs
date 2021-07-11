@@ -4,7 +4,6 @@ using System;
 
 namespace Bank.TransferRequest.Application.Queries
 {
-    //public class RequestStatusQuery : IRequest<RequestStatusDto>
     public class RequestStatusQuery : Command<RequestStatusDto>
     {
         public Guid TransactionId { get; set; }

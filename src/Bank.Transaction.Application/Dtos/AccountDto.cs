@@ -1,4 +1,4 @@
-﻿namespace Bank.Transaction.Application.Dtos
+﻿namespace Bank.TransferConsumer.Application.Dtos
 {
     public class AccountDto
     {

@@ -1,7 +1,7 @@
-﻿using Bank.Transaction.Application.Interfaces;
-using Bank.Transaction.Application.Services;
-using Bank.Transfer.Domain.Core.Interface;
+﻿using Bank.Transfer.Domain.Core.Interface;
 using Bank.Transfer.Domain.Options;
+using Bank.TransferConsumer.Application.Interfaces;
+using Bank.TransferConsumer.Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
