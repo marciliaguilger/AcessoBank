@@ -19,8 +19,8 @@ namespace Bank.TransferProcess.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerConfiguration();
             services.ResolveDependencies(Configuration);
-
             services.AddControllers();
         }
 
@@ -41,6 +41,7 @@ namespace Bank.TransferProcess.Api
             {
                 endpoints.MapControllers();
             });
+            app.UseSwaggerSetup();
         }
     }
 }
