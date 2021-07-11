@@ -23,24 +23,20 @@ namespace Bank.TransferProcess.Api.Configuration
         {
            services.AddDbContext<BankContext>(options =>
                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<BankContext>();
 
             services.AddRefitClient<IAccountService>()
                .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration.GetSection("ExternalAccountService:BaseUrl").Value));
 
+            services.AddMediatR(typeof(Startup));
             services.AddScoped<IMediatorHandler, MediatorHandler>();
-            services.AddScoped<BankContext>();
-            
+            services.AddScoped<IRequestHandler<TransferenceProcessCommand, bool>, TransferenceProcessCommandHandler>();
+            services.AddScoped<IRequestHandler<TransferenceStatusUpdateCommand, bool>, TransferenceStatusUpdateCommandHandler>();
+
+            services.AddScoped<ITransferProcessService, TransferProcessService>();
+            services.AddScoped<ITransferenceService, TransferenceService>();
             services.AddScoped<ITransferenceRepository, TransferenceRepository>();
             
-            services.AddScoped<ITransferenceService, TransferenceService>();
-            services.AddScoped<ITransferProcessService, TransferProcessService>();
-            
-            services.AddMediatR(typeof(Startup));
-
-            services.AddTransient<IMediatorHandler, MediatorHandler>();
-            services.AddTransient<IRequestHandler<TransferenceProcessCommand, bool>, TransferenceProcessCommandHandler>();
-            services.AddTransient<IRequestHandler<TransferenceStatusUpdateCommand, bool>, TransferenceStatusUpdateCommandHandler>();
-
             return services;
         }
     }

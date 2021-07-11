@@ -27,14 +27,14 @@ namespace Bank.TransferProcess.Application.Service
             var originAccount = await ValidateAccountAsync(transferenceProcessDto.Id, transferenceProcessDto.AccountOrigin);
             if (originAccount ==null)
             {
-                await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Error, "Origin account not found");
+                await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Error, "An error ocurred when trying to get origin account");
                 //gravar log
                 return false;
             }
             var destinationAccount = await ValidateAccountAsync(transferenceProcessDto.Id, transferenceProcessDto.AccountDestination);
             if (destinationAccount ==null)
             {
-                await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Error, "Destination account not found");
+                await UpdateStatus(transferenceProcessDto.Id, TransferenceStatus.Error, "An error ocurred when trying to get origin account");
                 //gravar log
                 return false;
             }
