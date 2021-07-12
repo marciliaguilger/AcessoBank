@@ -34,13 +34,6 @@ Update database:
 2. Configure connectionString in appsetting.json
 3. Run in package manager console: Update-Database
 
-### 🎲 Running tools via Docker
-
-```bash
-# Clone this repository
-$ git clone <https://github.com/marciliaguilger/AcessoBank.git>
-
-
 ### 🛠 Tecnologys
 
 The following tools were used in the construction of the project:
