@@ -34,6 +34,14 @@ Update database:
 2. Configure connectionString in appsetting.json
 3. Run in package manager console: Update-Database
 
+Don't forget to run Account API in Docker :)
+1. docker run -d -p 5000:80 baldini/testacesso
+
+There are three APis in this solution, both of them have to run at same time.
+They will listen at ports: 5010, 5020, 5030 respectvely.
+The swagger interface will open for two of them. To test use only the api running on port 5010.
+
+
 ### 🛠 Tecnologys
 
 The following tools were used in the construction of the project:
