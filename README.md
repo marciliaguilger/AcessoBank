@@ -1,8 +1,5 @@
 # AcessoBank
 
-
-# User api
-
 ## API developed to perform bank transfers between two accounts
 
 <p align="center">
