@@ -27,7 +27,7 @@ namespace Bank.TransferProcess.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Process(TransferRequestedEvent transferRequestedEvent)
         {
             
@@ -38,9 +38,9 @@ namespace Bank.TransferProcess.Api.Controllers
             
             var result = await _mediatorHandler.SendCommand<TransferenceProcessCommand, bool>(transferenceProcessCommand);
 
-            if (!result) return BadRequest();
+            if (!result) return BadRequest(false);
 
-            return Ok();
+            return Ok(true);
             
         }
        

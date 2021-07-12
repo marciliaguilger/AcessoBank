@@ -47,7 +47,6 @@ namespace Bank.TransferConsumer.Receiver
             };
 
             _connection = factory.CreateConnection();
-            _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
             _channel = _connection.CreateModel();
             _channel.QueueDeclare(queue: _queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
         }
@@ -67,11 +66,6 @@ namespace Bank.TransferConsumer.Receiver
 
                     _channel.BasicAck(ea.DeliveryTag, false);
                 };
-                //consumer.Shutdown += OnConsumerShutdown;
-                //consumer.Registered += OnConsumerRegistered;
-                //consumer.Unregistered += OnConsumerUnregistered;
-                //consumer.ConsumerCancelled += OnConsumerCancelled;
-
                 _channel.BasicConsume(_queueName, false, consumer);
 
                 return Task.CompletedTask;
@@ -84,10 +78,6 @@ namespace Bank.TransferConsumer.Receiver
                 var _transactionAppService = scope.ServiceProvider.GetRequiredService<ITransactionAppService>();
                 _transactionAppService.ProccessTransferenceAsync(transference);
             }
-        }
-
-        private void RabbitMQ_ConnectionShutdown(object sender, ShutdownEventArgs e)
-        {
         }
 
         public override void Dispose()

@@ -17,6 +17,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
+using System;
+using System.Reflection;
 
 namespace Bank.TransferRequest.Api.Configuration
 {
@@ -44,6 +48,15 @@ namespace Bank.TransferRequest.Api.Configuration
             var serviceClientSettingsConfig = configuration.GetSection("RabbitMQConfigurations");
             services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
 
+            var elasticUri = configuration.GetSection("ElasticConfiguration:Uri");
+            Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri.Value))
+            {
+                AutoRegisterTemplate = true,
+                IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+            })
+            .CreateLogger();
             return services;
         }
     }

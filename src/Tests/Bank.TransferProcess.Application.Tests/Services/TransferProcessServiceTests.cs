@@ -3,6 +3,7 @@ using Bank.Transfer.Domain.Core.Dtos;
 using Bank.Transfer.Domain.Core.Interface;
 using Bank.TransferProcess.Application.Dtos;
 using Bank.TransferProcess.Application.Service;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Refit;
 using System;
@@ -17,12 +18,14 @@ namespace Bank.TransferProcess.Application.Tests.Services
     {
         private readonly Mock<IAccountService> _accountServiceMock;
         private readonly Mock<IMediatorHandler> _mediatorHandlerMock;
+        private readonly Mock<ILogger<TransferProcessService>> _loggerMock;
 
 
         public TransferProcessServiceTests()
         {
             _accountServiceMock = new Mock<IAccountService>();
             _mediatorHandlerMock = new Mock<IMediatorHandler>();
+            _loggerMock = new Mock<ILogger<TransferProcessService>>();
         }
 
         [Fact(DisplayName = "Transfer process - success")]
@@ -55,7 +58,7 @@ namespace Bank.TransferProcess.Application.Tests.Services
 
             var transferenceProcessDto = new TransferenceProcessDto(id,originaccountNumber,destinationAccountNumber,amount);
             
-            var transferProcessService = new TransferProcessService(_accountServiceMock.Object, _mediatorHandlerMock.Object);
+            var transferProcessService = new TransferProcessService(_accountServiceMock.Object, _mediatorHandlerMock.Object, _loggerMock.Object);
             var result = await transferProcessService.Process(transferenceProcessDto);
 
             Assert.True(result);
@@ -91,7 +94,7 @@ namespace Bank.TransferProcess.Application.Tests.Services
 
             var transferenceProcessDto = new TransferenceProcessDto(id, originaccountNumber, destinationAccountNumber, amount);
 
-            var transferProcessService = new TransferProcessService(_accountServiceMock.Object, _mediatorHandlerMock.Object);
+            var transferProcessService = new TransferProcessService(_accountServiceMock.Object, _mediatorHandlerMock.Object, _loggerMock.Object);
             var result = await transferProcessService.Process(transferenceProcessDto);
 
             Assert.True(!result);

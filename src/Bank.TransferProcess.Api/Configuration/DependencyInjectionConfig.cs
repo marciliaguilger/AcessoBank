@@ -13,7 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
 using System;
+using System.Reflection;
 
 namespace Bank.TransferProcess.Api.Configuration
 {
@@ -36,7 +39,17 @@ namespace Bank.TransferProcess.Api.Configuration
             services.AddScoped<ITransferProcessService, TransferProcessService>();
             services.AddScoped<ITransferenceService, TransferenceService>();
             services.AddScoped<ITransferenceRepository, TransferenceRepository>();
-            
+
+            var elasticUri = configuration.GetSection("ElasticConfiguration:Uri");
+            Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri.Value))
+            {
+                AutoRegisterTemplate = true,
+                IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+            })
+            .CreateLogger();
+
             return services;
         }
     }

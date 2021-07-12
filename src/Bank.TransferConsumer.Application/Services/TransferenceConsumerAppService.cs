@@ -1,17 +1,21 @@
 ﻿using Bank.Transfer.Domain.Core.Events;
 using Bank.Transfer.Domain.Core.Interface;
 using Bank.TransferConsumer.Application.Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 
 namespace Bank.TransferConsumer.Application.Services
 {
-    public class TransactionAppService : ITransactionAppService
+    public class TransferenceConsumerAppService : ITransactionAppService
     {
         private readonly ITransferenceProcessService _transferenceProcessService;
-        public TransactionAppService(ITransferenceProcessService transferenceProcessService)
+        private readonly ILogger<TransferenceConsumerAppService> _logger;
+
+        public TransferenceConsumerAppService(ITransferenceProcessService transferenceProcessService, ILogger<TransferenceConsumerAppService> logger)
         {
             _transferenceProcessService = transferenceProcessService;
+            _logger = logger;
         }
         public  async void ProccessTransferenceAsync(TransferRequestedEvent transferRequestedEvent)
         {
@@ -21,8 +25,7 @@ namespace Bank.TransferConsumer.Application.Services
             }
             catch (Exception ex)
             {
-                // log an error message here
-
+                _logger.LogError(ex, "Error when trying to process transference request");
                 Debug.WriteLine(ex.Message);
             }
         }
